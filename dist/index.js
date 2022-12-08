@@ -3554,7 +3554,7 @@ var NuGetPackageBuilder = /** @class */ (function () {
                             // include the nuspec into the package
                             inputFilePatterns.push(nuspecFile);
                         }
-                        return [4 /*yield*/, (0, zipUtils_1.doZip)(inputFilePatterns, args.outputFolder, archiveFilename, 8, args.overwrite)];
+                        return [4 /*yield*/, (0, zipUtils_1.doZip)(inputFilePatterns, args.outputFolder, archiveFilename, args.logger, 8, args.overwrite)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, archiveFilename];
@@ -3633,7 +3633,7 @@ var ZipPackageBuilder = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         archiveFilename = "".concat(args.packageId, ".").concat(args.version, ".zip");
-                        return [4 /*yield*/, (0, zipUtils_1.doZip)(args.inputFilePatterns, args.outputFolder, archiveFilename, args.compressionLevel, args.overwrite)];
+                        return [4 /*yield*/, (0, zipUtils_1.doZip)(args.inputFilePatterns, args.outputFolder, archiveFilename, args.logger, args.compressionLevel, args.overwrite)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, archiveFilename];
@@ -3710,35 +3710,41 @@ var glob_1 = __nccwpck_require__(1957);
 var path_1 = __importDefault(__nccwpck_require__(1017));
 var util_1 = __nccwpck_require__(3837);
 var globp = (0, util_1.promisify)(glob_1.glob);
-function doZip(inputFilePatterns, outputFolder, zipFilename, compressionLevel, overwrite) {
+function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compressionLevel, overwrite) {
+    var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
         var archivePath, zip, files, files_1, files_1_1, file;
-        var e_1, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var e_1, _d;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
                 case 0:
-                    archivePath = path_1.default.join(outputFolder, zipFilename);
+                    archivePath = path_1.default.resolve(outputFolder, zipFilename);
+                    (_a = logger.info) === null || _a === void 0 ? void 0 : _a.call(logger, "Writing to package: ".concat(archivePath));
                     zip = new adm_zip_1.default();
                     return [4 /*yield*/, expandGlobs(inputFilePatterns)];
                 case 1:
-                    files = _b.sent();
+                    files = _e.sent();
                     try {
                         for (files_1 = __values(files), files_1_1 = files_1.next(); !files_1_1.done; files_1_1 = files_1.next()) {
                             file = files_1_1.value;
+                            (_b = logger.debug) === null || _b === void 0 ? void 0 : _b.call(logger, "Adding file: ".concat(file));
                             zip.addLocalFile(file);
                         }
                     }
                     catch (e_1_1) { e_1 = { error: e_1_1 }; }
                     finally {
                         try {
-                            if (files_1_1 && !files_1_1.done && (_a = files_1.return)) _a.call(files_1);
+                            if (files_1_1 && !files_1_1.done && (_d = files_1.return)) _d.call(files_1);
                         }
                         finally { if (e_1) throw e_1.error; }
+                    }
+                    if (compressionLevel) {
+                        (_c = logger.info) === null || _c === void 0 ? void 0 : _c.call(logger, "Overriding compression level: ".concat(compressionLevel));
                     }
                     setCompressionLevel(zip, compressionLevel || 8);
                     return [4 /*yield*/, zip.writeZipPromise(archivePath, { overwrite: overwrite })];
                 case 2:
-                    _b.sent();
+                    _e.sent();
                     return [2 /*return*/];
             }
         });
@@ -41503,14 +41509,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createPackageFromInputs = void 0;
 const api_client_1 = __nccwpck_require__(586);
-function createPackageFromInputs(parameters) {
+function createPackageFromInputs(parameters, logger) {
     return __awaiter(this, void 0, void 0, function* () {
         const builder = new api_client_1.ZipPackageBuilder();
         return builder.pack({
             packageId: parameters.packageId,
             version: parameters.version,
             outputFolder: parameters.outputFolder,
-            inputFilePatterns: parameters.files
+            inputFilePatterns: parameters.files,
+            overwrite: true,
+            logger
         });
     });
 }
@@ -41537,12 +41545,28 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const input_parameters_1 = __nccwpck_require__(9519);
 const create_package_1 = __nccwpck_require__(1628);
-// GitHub actions entrypoint
 const fs_1 = __nccwpck_require__(7147);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const logger = {
+            debug: message => {
+                if ((0, core_1.isDebug)()) {
+                    (0, core_1.debug)(message);
+                }
+            },
+            info: message => (0, core_1.info)(message),
+            warn: message => (0, core_1.warning)(message),
+            error: (message, err) => {
+                if (err !== undefined) {
+                    (0, core_1.error)(err.message);
+                }
+                else {
+                    (0, core_1.error)(message);
+                }
+            }
+        };
         const parameters = (0, input_parameters_1.getInputParameters)();
-        const packageFile = yield (0, create_package_1.createPackageFromInputs)(parameters);
+        const packageFile = yield (0, create_package_1.createPackageFromInputs)(parameters, logger);
         const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY;
         if (stepSummaryFile) {
             (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${packageFile}`);

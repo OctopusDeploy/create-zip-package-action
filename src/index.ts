@@ -1,14 +1,32 @@
-import { setFailed } from '@actions/core'
+import { debug, error, info, isDebug, setFailed, warning } from '@actions/core'
 import { getInputParameters } from './input-parameters'
 import { createPackageFromInputs } from './create-package'
+import { Logger } from '@octopusdeploy/api-client'
+import { writeFileSync } from 'fs'
 
 // GitHub actions entrypoint
-import { writeFileSync } from 'fs'
 ;(async (): Promise<void> => {
   try {
+    const logger: Logger = {
+      debug: message => {
+        if (isDebug()) {
+          debug(message)
+        }
+      },
+      info: message => info(message),
+      warn: message => warning(message),
+      error: (message, err) => {
+        if (err !== undefined) {
+          error(err.message)
+        } else {
+          error(message)
+        }
+      }
+    }
+
     const parameters = getInputParameters()
 
-    const packageFile = await createPackageFromInputs(parameters)
+    const packageFile = await createPackageFromInputs(parameters, logger)
 
     const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY
     if (stepSummaryFile) {
