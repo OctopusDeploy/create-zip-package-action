@@ -38,11 +38,11 @@ jobs:
         with:
           package_id: 'TestZipPackage'
           version: '1.0.0'
-          output_folder: 'packaging'
+          output_folder: './packaging'
           files: |
             reports/**/*
 
       - uses: actions/upload-artifact@v3
         with:
           name: TestZipPackage.1.0.0
-          path: packaging/TestZipPackage.1.0.0.zip
+          path: ./packaging/TestZipPackage.1.0.0.zip
