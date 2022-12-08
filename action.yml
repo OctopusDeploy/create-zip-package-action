@@ -1,0 +1,24 @@
+name: 'Create Zip Package for Octopus Deploy'
+description: 'GitHub Action to create a Zip package for Octopus Deploy'
+author: 'Octopus Deploy'
+branding:
+  color: 'blue'
+  icon: 'package'
+
+inputs:
+  package_id:
+    description: 'Package Id.'
+    required: true
+  version:
+    description: 'Package version.'
+    required: true
+  output_folder:
+    description: 'Package Id.'
+    required: true
+  files:
+    description: 'Multi-line list of files to include in the package. Supports globbing.'
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
