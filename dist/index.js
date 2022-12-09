@@ -3719,7 +3719,7 @@ function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compression
             switch (_e.label) {
                 case 0:
                     archivePath = path_1.default.resolve(outputFolder, zipFilename);
-                    (_a = logger.info) === null || _a === void 0 ? void 0 : _a.call(logger, "Writing to package: ".concat(archivePath));
+                    (_a = logger.info) === null || _a === void 0 ? void 0 : _a.call(logger, "Writing to package: ".concat(archivePath, "..."));
                     zip = new adm_zip_1.default();
                     return [4 /*yield*/, expandGlobs(inputFilePatterns)];
                 case 1:
@@ -3727,7 +3727,7 @@ function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compression
                     try {
                         for (files_1 = __values(files), files_1_1 = files_1.next(); !files_1_1.done; files_1_1 = files_1.next()) {
                             file = files_1_1.value;
-                            (_b = logger.debug) === null || _b === void 0 ? void 0 : _b.call(logger, "Adding file: ".concat(file));
+                            (_b = logger.debug) === null || _b === void 0 ? void 0 : _b.call(logger, "Adding file: ".concat(file, "..."));
                             zip.addLocalFile(file);
                         }
                     }
@@ -5941,30 +5941,35 @@ var ServerTaskWaiter = /** @class */ (function () {
                         }, timeout);
                         _a.label = 1;
                     case 1:
-                        if (!!stop) return [3 /*break*/, 7];
-                        if (!pollingCallback) return [3 /*break*/, 3];
-                        return [4 /*yield*/, spaceServerTaskRepository.getDetails(serverTaskId)];
+                        if (!!stop) return [3 /*break*/, 10];
+                        _a.label = 2;
                     case 2:
+                        _a.trys.push([2, , 7, 8]);
+                        if (!pollingCallback) return [3 /*break*/, 4];
+                        return [4 /*yield*/, spaceServerTaskRepository.getDetails(serverTaskId)];
+                    case 3:
                         taskDetails = _a.sent();
                         pollingCallback(taskDetails);
                         if (taskDetails.Task.IsCompleted) {
-                            clearTimeout(t);
                             return [2 /*return*/, taskDetails.Task];
                         }
-                        return [3 /*break*/, 5];
-                    case 3: return [4 /*yield*/, spaceServerTaskRepository.getById(serverTaskId)];
-                    case 4:
+                        return [3 /*break*/, 6];
+                    case 4: return [4 /*yield*/, spaceServerTaskRepository.getById(serverTaskId)];
+                    case 5:
                         task = _a.sent();
                         if (task.IsCompleted) {
-                            clearTimeout(t);
                             return [2 /*return*/, task];
                         }
-                        _a.label = 5;
-                    case 5: return [4 /*yield*/, sleep(statusCheckSleepCycle)];
-                    case 6:
+                        _a.label = 6;
+                    case 6: return [3 /*break*/, 8];
+                    case 7:
+                        clearTimeout(t);
+                        return [7 /*endfinally*/];
+                    case 8: return [4 /*yield*/, sleep(statusCheckSleepCycle)];
+                    case 9:
                         _a.sent();
                         return [3 /*break*/, 1];
-                    case 7: return [2 /*return*/, null];
+                    case 10: return [2 /*return*/, null];
                 }
             });
         });
@@ -41506,13 +41511,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createPackageFromInputs = void 0;
 const api_client_1 = __nccwpck_require__(586);
+const path_1 = __importDefault(__nccwpck_require__(1017));
 function createPackageFromInputs(parameters, logger) {
     return __awaiter(this, void 0, void 0, function* () {
         const builder = new api_client_1.ZipPackageBuilder();
-        return builder.pack({
+        const packageFilename = yield builder.pack({
             packageId: parameters.packageId,
             version: parameters.version,
             outputFolder: parameters.outputFolder,
@@ -41520,6 +41529,7 @@ function createPackageFromInputs(parameters, logger) {
             overwrite: true,
             logger
         });
+        return path_1.default.join(parameters.outputFolder, packageFilename);
     });
 }
 exports.createPackageFromInputs = createPackageFromInputs;
