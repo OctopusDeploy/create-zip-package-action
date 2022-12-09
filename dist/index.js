@@ -41567,6 +41567,7 @@ const fs_1 = __nccwpck_require__(7147);
         };
         const parameters = (0, input_parameters_1.getInputParameters)();
         const packageFile = yield (0, create_package_1.createPackageFromInputs)(parameters, logger);
+        (0, core_1.setOutput)('package_file', packageFile);
         const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY;
         if (stepSummaryFile) {
             (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${packageFile}`);

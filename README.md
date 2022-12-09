@@ -34,6 +34,12 @@ steps:
 | `output_folder` | **Required.** The folder to put the resulting package in.                            |
 | `files`         | **Required.** Multi-line list of files to include in the package. Supports globbing. |
 
+## 📤 Outputs
+
+| Name           | Description                                         |
+| :------------- | :-------------------------------------------------- |
+| `package_file` | The full path to the package file that was created. |
+
 ## 🤝 Contributions
 
 Contributions are welcome! :heart: Please read our [Contributing Guide](CONTRIBUTING.md) for information about how to get involved in this project.

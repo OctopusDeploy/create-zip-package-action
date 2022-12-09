@@ -19,6 +19,10 @@ inputs:
     description: 'Multi-line list of files to include in the package. Supports globbing.'
     required: true
 
+outputs:
+  package_file:
+    description: 'The full path to the package file that was created.'
+
 runs:
   using: 'node16'
   main: 'dist/index.js'

@@ -1,4 +1,4 @@
-import { debug, error, info, isDebug, setFailed, warning } from '@actions/core'
+import { debug, error, info, isDebug, setFailed, setOutput, warning } from '@actions/core'
 import { getInputParameters } from './input-parameters'
 import { createPackageFromInputs } from './create-package'
 import { Logger } from '@octopusdeploy/api-client'
@@ -27,6 +27,8 @@ import { writeFileSync } from 'fs'
     const parameters = getInputParameters()
 
     const packageFile = await createPackageFromInputs(parameters, logger)
+
+    setOutput('package_file', packageFile)
 
     const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY
     if (stepSummaryFile) {
