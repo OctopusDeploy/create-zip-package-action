@@ -1,0 +1,48 @@
+name: 'build-test'
+on:
+  push:
+    paths-ignore:
+      - '**/*.md'
+
+  schedule:
+    # Daily 5am australian/brisbane time (7pm UTC)
+    - cron: '0 19 * * *'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+      checks: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install package dependencies
+        run: npm install
+
+      - name: Compile and run tests
+        run: npm run all
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: JEST Tests
+          path: 'reports/jest-*.xml'
+          reporter: jest-junit
+
+      - name: GitHub Action self-test
+        id: self_test
+        uses: ./
+        with:
+          package_id: 'TestZipPackage'
+          version: '1.0.0'
+          output_folder: './packaging'
+          files: |
+            reports/**/*
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: TestZipPackage.1.0.0
+          path: ${{ steps.self_test.outputs.package_file }}
