@@ -2,19 +2,14 @@
 
 <img alt= "" src="https://github.com/OctopusDeploy/create-zip-package-action/raw/main/assets/github-actions-octopus.png" />
 
-This is a GitHub Action to create a Zip package to push [Octopus Deploy](https://octopus.com/).
+This is a GitHub Action to create a Zip package to push to [Octopus Deploy](https://octopus.com/).
 
 ## Examples
-
-Incorporate the following actions in your workflow to push a package to Octopus Deploy using an API key, a target instance (i.e. `server`), and a project:
 
 ```yml
 steps:
   - uses: actions/checkout@v3
-  - name: Install Octopus CLI 🐙
-    uses: OctopusDeploy/install-octopus-cli-action@v1
-    with:
-      version: latest
+
   - name: Create a Zip package 🐙
     uses: OctopusDeploy/create-zip-package-action@v3
     with:
