@@ -1,9 +1,10 @@
 import { Logger, ZipPackageBuilder } from '@octopusdeploy/api-client'
+import path from 'path'
 import { InputParameters } from './input-parameters'
 
 export async function createPackageFromInputs(parameters: InputParameters, logger: Logger): Promise<string> {
   const builder = new ZipPackageBuilder()
-  return builder.pack({
+  const packageFilename = await builder.pack({
     packageId: parameters.packageId,
     version: parameters.version,
     outputFolder: parameters.outputFolder,
@@ -11,4 +12,6 @@ export async function createPackageFromInputs(parameters: InputParameters, logge
     overwrite: true,
     logger
   })
+
+  return path.join(parameters.outputFolder, packageFilename)
 }
