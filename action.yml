@@ -15,8 +15,11 @@ inputs:
   output_folder:
     description: 'Package Id.'
     required: true
+  base_path:
+    description: 'The base path for the input files.'
+    required: true
   files:
-    description: 'Multi-line list of files to include in the package. Supports globbing.'
+    description: 'Multi-line list of files to include in the package, relative to the basePath. Supports globbing.'
     required: true
 
 outputs:

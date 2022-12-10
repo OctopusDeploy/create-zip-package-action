@@ -8,6 +8,7 @@ export async function createPackageFromInputs(parameters: InputParameters, logge
     packageId: parameters.packageId,
     version: parameters.version,
     outputFolder: parameters.outputFolder,
+    basePath: parameters.basePath,
     inputFilePatterns: parameters.files,
     overwrite: true,
     logger
