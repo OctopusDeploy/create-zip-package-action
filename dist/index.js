@@ -3706,6 +3706,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.doZip = void 0;
 var adm_zip_1 = __importDefault(__nccwpck_require__(6761));
+var fs_1 = __importDefault(__nccwpck_require__(7147));
 var glob_1 = __nccwpck_require__(1957);
 var path_1 = __importDefault(__nccwpck_require__(1017));
 var util_1 = __nccwpck_require__(3837);
@@ -3728,7 +3729,12 @@ function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compression
                         for (files_1 = __values(files), files_1_1 = files_1.next(); !files_1_1.done; files_1_1 = files_1.next()) {
                             file = files_1_1.value;
                             (_b = logger.debug) === null || _b === void 0 ? void 0 : _b.call(logger, "Adding file: ".concat(file, "..."));
-                            zip.addLocalFile(file);
+                            if (fs_1.default.lstatSync(file).isDirectory()) {
+                                zip.addFile("".concat(file, "/"), new Buffer([0x00]));
+                            }
+                            else {
+                                zip.addLocalFile(file, path_1.default.dirname(file));
+                            }
                         }
                     }
                     catch (e_1_1) { e_1 = { error: e_1_1 }; }
