@@ -32,9 +32,10 @@ steps:
 
 ## 📤 Outputs
 
-| Name           | Description                                         |
-| :------------- | :-------------------------------------------------- |
-| `package_file` | The full path to the package file that was created. |
+| Name                | Description                                                   |
+| :------------------ | :------------------------------------------------------------ |
+| `package_file_path` | The full path to the package file that was created.           |
+| `package_filename`  | The filename, without the path, of the file that was created. |
 
 ## 🤝 Contributions
 

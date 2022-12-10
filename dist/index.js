@@ -41550,7 +41550,7 @@ function createPackageFromInputs(parameters, logger) {
             overwrite: true,
             logger
         });
-        return path_1.default.join(parameters.outputFolder, packageFilename);
+        return { filePath: path_1.default.join(parameters.outputFolder, packageFilename), filename: packageFilename };
     });
 }
 exports.createPackageFromInputs = createPackageFromInputs;
@@ -41597,11 +41597,12 @@ const fs_1 = __nccwpck_require__(7147);
             }
         };
         const parameters = (0, input_parameters_1.getInputParameters)();
-        const packageFile = yield (0, create_package_1.createPackageFromInputs)(parameters, logger);
-        (0, core_1.setOutput)('package_file', packageFile);
+        const result = yield (0, create_package_1.createPackageFromInputs)(parameters, logger);
+        (0, core_1.setOutput)('package_file_path', result.filePath);
+        (0, core_1.setOutput)('package_filename', result.filename);
         const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY;
         if (stepSummaryFile) {
-            (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${packageFile}`);
+            (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${result.filename}`);
         }
     }
     catch (e) {
