@@ -3742,7 +3742,7 @@ function doZip(basePath, inputFilePatterns, outputFolder, zipFilename, logger, c
                             file = files_1_1.value;
                             (_b = logger.debug) === null || _b === void 0 ? void 0 : _b.call(logger, "Adding file: ".concat(file, "..."));
                             if (fs_1.default.lstatSync(file).isDirectory()) {
-                                zip.addFile("".concat(file, "/"), new Buffer([0x00]));
+                                zip.addFile("".concat(file, "/"), Buffer.from([0x00]));
                             }
                             else {
                                 dirName = path_1.default.dirname(file);
@@ -3762,7 +3762,7 @@ function doZip(basePath, inputFilePatterns, outputFolder, zipFilename, logger, c
                     }
                     setCompressionLevel(zip, compressionLevel || 8);
                     process.chdir(initialWorkingDirectory);
-                    return [4 /*yield*/, zip.writeZipPromise(archivePath, { overwrite: overwrite })];
+                    return [4 /*yield*/, zip.writeZipPromise(archivePath, { overwrite: overwrite || true })];
                 case 2:
                     _e.sent();
                     return [2 /*return*/];
