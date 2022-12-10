@@ -13,7 +13,7 @@ inputs:
     description: 'Package version.'
     required: true
   output_folder:
-    description: 'Package Id.'
+    description: 'The folder to put the resulting package in, relative to the current working directory, not the base_path.'
     required: true
   base_path:
     description: 'The base path for the input files.'

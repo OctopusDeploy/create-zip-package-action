@@ -22,13 +22,13 @@ steps:
 
 ## 📥 Inputs
 
-| Name            | Description                                                                                                     |
-| :-------------- | :-------------------------------------------------------------------------------------------------------------- |
-| `package_id`    | **Required.** Package id.                                                                                       |
-| `version`       | **Required.** Package version.                                                                                  |
-| `output_folder` | **Required.** The folder to put the resulting package in.                                                       |
-| `base_path`     | **Required.** The base path for the input files.                                                                |
-| `files`         | **Required.** Multi-line list of files to include in the package, relative to the base path. Supports globbing. |
+| Name            | Description                                                                                                             |
+| :-------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| `package_id`    | **Required.** Package id.                                                                                               |
+| `version`       | **Required.** Package version.                                                                                          |
+| `output_folder` | **Required.** The folder to put the resulting package in, relative to the current working directory, not the base_path. |
+| `base_path`     | **Required.** The base path for the input files.                                                                        |
+| `files`         | **Required.** Multi-line list of files to include in the package, relative to the base path. Supports globbing.         |
 
 ## 📤 Outputs
 
