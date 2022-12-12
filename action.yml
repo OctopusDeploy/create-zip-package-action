@@ -13,15 +13,20 @@ inputs:
     description: 'Package version.'
     required: true
   output_folder:
-    description: 'Package Id.'
+    description: 'The folder to put the resulting package in, relative to the current working directory, not the base_path.'
+    required: true
+  base_path:
+    description: 'The base path for the input files.'
     required: true
   files:
-    description: 'Multi-line list of files to include in the package. Supports globbing.'
+    description: 'Multi-line list of files to include in the package, relative to the basePath. Supports globbing.'
     required: true
 
 outputs:
-  package_file:
+  package_file_path:
     description: 'The full path to the package file that was created.'
+  package_filename:
+    description: 'The filename, without the path, of the file that was created.'
 
 runs:
   using: 'node16'

@@ -3523,22 +3523,21 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NuGetPackageBuilder = void 0;
 var zipUtils_1 = __nccwpck_require__(7273);
 var fs_1 = __importDefault(__nccwpck_require__(7147));
-var os_1 = __importDefault(__nccwpck_require__(2037));
 var path_1 = __importDefault(__nccwpck_require__(1017));
 var NuGetPackageBuilder = /** @class */ (function () {
     function NuGetPackageBuilder() {
     }
     NuGetPackageBuilder.prototype.pack = function (args) {
         return __awaiter(this, void 0, void 0, function () {
-            var archiveFilename, tmpFolder, inputFilePatterns, nuspecFile;
+            var archiveFilename, inputFilePatterns, nuspecFilename, nuspecFile;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         archiveFilename = "".concat(args.packageId, ".").concat(args.version, ".nupkg");
-                        tmpFolder = os_1.default.tmpdir();
                         inputFilePatterns = args.inputFilePatterns;
                         if (args.nuspecArgs) {
-                            nuspecFile = path_1.default.join(tmpFolder, "".concat(args.packageId, ".nuspec"));
+                            nuspecFilename = "".concat(args.packageId, ".nuspec");
+                            nuspecFile = path_1.default.join(args.basePath, nuspecFilename);
                             fs_1.default.writeFileSync(nuspecFile, '<?xml version="1.0" encoding="utf-8"?>\n');
                             fs_1.default.appendFileSync(nuspecFile, '<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">\n');
                             fs_1.default.appendFileSync(nuspecFile, "    <metadata>\n");
@@ -3552,9 +3551,9 @@ var NuGetPackageBuilder = /** @class */ (function () {
                             fs_1.default.appendFileSync(nuspecFile, "    </metadata>\n");
                             fs_1.default.appendFileSync(nuspecFile, "</package>\n");
                             // include the nuspec into the package
-                            inputFilePatterns.push(nuspecFile);
+                            inputFilePatterns.push(nuspecFilename);
                         }
-                        return [4 /*yield*/, (0, zipUtils_1.doZip)(inputFilePatterns, args.outputFolder, archiveFilename, args.logger, 8, args.overwrite)];
+                        return [4 /*yield*/, (0, zipUtils_1.doZip)(args.basePath, inputFilePatterns, args.outputFolder, archiveFilename, args.logger, 8, args.overwrite)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, archiveFilename];
@@ -3633,7 +3632,7 @@ var ZipPackageBuilder = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         archiveFilename = "".concat(args.packageId, ".").concat(args.version, ".zip");
-                        return [4 /*yield*/, (0, zipUtils_1.doZip)(args.inputFilePatterns, args.outputFolder, archiveFilename, args.logger, args.compressionLevel, args.overwrite)];
+                        return [4 /*yield*/, (0, zipUtils_1.doZip)(args.basePath, args.inputFilePatterns, args.outputFolder, archiveFilename, args.logger, args.compressionLevel, args.overwrite)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/, archiveFilename];
@@ -3706,20 +3705,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.doZip = void 0;
 var adm_zip_1 = __importDefault(__nccwpck_require__(6761));
+var fs_1 = __importDefault(__nccwpck_require__(7147));
 var glob_1 = __nccwpck_require__(1957);
 var path_1 = __importDefault(__nccwpck_require__(1017));
 var util_1 = __nccwpck_require__(3837);
 var globp = (0, util_1.promisify)(glob_1.glob);
-function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compressionLevel, overwrite) {
+/**
+ * Creates a Zip file with a given filename from the inputFilePatterns.
+ *
+ * @param {string} basePath The base path for the input files.
+ * @param {string[]} inputFilePatterns Array of input file patterns, relative to the basePath. Specific files and globbing patterns are both supported.
+ * @param {string} outputFolder The folder to write the resulting Zip file to.
+ * @param {string} zipFilename The name of the Zip file to create.
+ * @param {Logger} logger Logger implementation for writing debug and info messages
+ * @param {number} compressionLevel Optional override for the compression level. Defaults to 8 if not specified.
+ * @param {boolean} overwrite Whether to overwrite the Zip file if it already exists. Defaults to true if not specified.
+ */
+function doZip(basePath, inputFilePatterns, outputFolder, zipFilename, logger, compressionLevel, overwrite) {
     var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function () {
-        var archivePath, zip, files, files_1, files_1_1, file;
+        var archivePath, initialWorkingDirectory, zip, files, files_1, files_1_1, file, dirName;
         var e_1, _d;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     archivePath = path_1.default.resolve(outputFolder, zipFilename);
                     (_a = logger.info) === null || _a === void 0 ? void 0 : _a.call(logger, "Writing to package: ".concat(archivePath, "..."));
+                    initialWorkingDirectory = process.cwd();
+                    process.chdir(path_1.default.resolve(initialWorkingDirectory, basePath));
                     zip = new adm_zip_1.default();
                     return [4 /*yield*/, expandGlobs(inputFilePatterns)];
                 case 1:
@@ -3728,7 +3741,13 @@ function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compression
                         for (files_1 = __values(files), files_1_1 = files_1.next(); !files_1_1.done; files_1_1 = files_1.next()) {
                             file = files_1_1.value;
                             (_b = logger.debug) === null || _b === void 0 ? void 0 : _b.call(logger, "Adding file: ".concat(file, "..."));
-                            zip.addLocalFile(file);
+                            if (fs_1.default.lstatSync(file).isDirectory()) {
+                                zip.addFile("".concat(file, "/"), Buffer.from([0x00]));
+                            }
+                            else {
+                                dirName = path_1.default.dirname(file);
+                                zip.addLocalFile(file, dirName === "." ? "" : dirName);
+                            }
                         }
                     }
                     catch (e_1_1) { e_1 = { error: e_1_1 }; }
@@ -3742,7 +3761,8 @@ function doZip(inputFilePatterns, outputFolder, zipFilename, logger, compression
                         (_c = logger.info) === null || _c === void 0 ? void 0 : _c.call(logger, "Overriding compression level: ".concat(compressionLevel));
                     }
                     setCompressionLevel(zip, compressionLevel || 8);
-                    return [4 /*yield*/, zip.writeZipPromise(archivePath, { overwrite: overwrite })];
+                    process.chdir(initialWorkingDirectory);
+                    return [4 /*yield*/, zip.writeZipPromise(archivePath, { overwrite: overwrite || true })];
                 case 2:
                     _e.sent();
                     return [2 /*return*/];
@@ -41525,11 +41545,12 @@ function createPackageFromInputs(parameters, logger) {
             packageId: parameters.packageId,
             version: parameters.version,
             outputFolder: parameters.outputFolder,
+            basePath: parameters.basePath,
             inputFilePatterns: parameters.files,
             overwrite: true,
             logger
         });
-        return path_1.default.join(parameters.outputFolder, packageFilename);
+        return { filePath: path_1.default.join(parameters.outputFolder, packageFilename), filename: packageFilename };
     });
 }
 exports.createPackageFromInputs = createPackageFromInputs;
@@ -41576,11 +41597,12 @@ const fs_1 = __nccwpck_require__(7147);
             }
         };
         const parameters = (0, input_parameters_1.getInputParameters)();
-        const packageFile = yield (0, create_package_1.createPackageFromInputs)(parameters, logger);
-        (0, core_1.setOutput)('package_file', packageFile);
+        const result = yield (0, create_package_1.createPackageFromInputs)(parameters, logger);
+        (0, core_1.setOutput)('package_file_path', result.filePath);
+        (0, core_1.setOutput)('package_filename', result.filename);
         const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY;
         if (stepSummaryFile) {
-            (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${packageFile}`);
+            (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${result.filename}`);
         }
     }
     catch (e) {
@@ -41609,6 +41631,7 @@ function getInputParameters() {
         packageId: (0, core_1.getInput)('package_id', { required: true }),
         version: (0, core_1.getInput)('version', { required: true }),
         outputFolder: (0, core_1.getInput)('output_folder', { required: true }),
+        basePath: (0, core_1.getInput)('base_path', { required: true }),
         files: (0, core_1.getMultilineInput)('files', { required: true })
     };
     return parameters;

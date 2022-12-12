@@ -39,10 +39,11 @@ jobs:
           package_id: 'TestZipPackage'
           version: '1.0.0'
           output_folder: './packaging'
+          base_path: reports
           files: |
-            reports/**/*
+            **/*
 
       - uses: actions/upload-artifact@v3
         with:
           name: TestZipPackage.1.0.0
-          path: ${{ steps.self_test.outputs.package_file }}
+          path: ${{ steps.self_test.outputs.package_file_path }}
