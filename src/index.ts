@@ -1,8 +1,8 @@
 import { debug, error, info, isDebug, setFailed, setOutput, warning } from '@actions/core'
-import { getInputParameters } from './input-parameters'
-import { createPackageFromInputs } from './create-package'
 import { Logger } from '@octopusdeploy/api-client'
 import { writeFileSync } from 'fs'
+import { createPackageFromInputs } from './create-package'
+import { getInputParameters } from './input-parameters'
 
 // GitHub actions entrypoint
 ;(async (): Promise<void> => {
@@ -33,7 +33,7 @@ import { writeFileSync } from 'fs'
 
     const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY
     if (stepSummaryFile) {
-      writeFileSync(stepSummaryFile, `🐙 Created package ${result.filename}`)
+      writeFileSync(stepSummaryFile, `🐙 Created package, ${result.filename}`)
     }
   } catch (e: unknown) {
     if (e instanceof Error) {
