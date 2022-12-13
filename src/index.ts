@@ -3,8 +3,6 @@ import { Logger } from '@octopusdeploy/api-client'
 import { writeFileSync } from 'fs'
 import { createPackageFromInputs } from './create-package'
 import { getInputParameters } from './input-parameters'
-
-// GitHub actions entrypoint
 ;(async (): Promise<void> => {
   try {
     const logger: Logger = {
@@ -33,7 +31,7 @@ import { getInputParameters } from './input-parameters'
 
     const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY
     if (stepSummaryFile) {
-      writeFileSync(stepSummaryFile, `🐙 Created package, ${result.filename}`)
+      writeFileSync(stepSummaryFile, `🐙 Created Zip package, ${result.filename}`)
     }
   } catch (e: unknown) {
     if (e instanceof Error) {

@@ -1,7 +1,6 @@
-import { CliOutput } from '../src/cli-util'
 import { promises as fs } from 'fs'
 
-export class CaptureOutput implements CliOutput {
+export class CaptureOutput {
   infos: string[]
   warns: string[]
 
