@@ -1,14 +1,14 @@
 {
   "author": "Octopus Deploy",
   "bugs": {
-    "url": "https://github.com/OctopusDeploy/push-package-action/issues"
+    "url": "https://github.com/OctopusDeploy/create-zip-package-action/issues"
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@octopusdeploy/api-client": "^2.1.1",
     "glob": "^8.0.3"
   },
-  "description": "GitHub Action to Push a Package to Octopus Deploy",
+  "description": "GitHub Action to create a Zip package for Octopus Deploy",
   "devDependencies": {
     "@types/glob": "^8.0.0",
     "@types/jest": "^29.2.4",
@@ -31,7 +31,7 @@
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.4"
   },
-  "homepage": "https://github.com/OctopusDeploy/push-package-action#readme",
+  "homepage": "https://github.com/OctopusDeploy/create-zip-package-action#readme",
   "jest": {
     "clearMocks": true,
     "collectCoverage": true,
@@ -70,10 +70,10 @@
   ],
   "license": "Apache-2.0",
   "main": "src/index.ts",
-  "name": "push-package-action",
+  "name": "create-zip-package-action",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OctopusDeploy/push-package-action.git"
+    "url": "git+https://github.com/OctopusDeploy/create-zip-package-action.git"
   },
   "scripts": {
     "all": "npm run format && npm run build && npm test",
