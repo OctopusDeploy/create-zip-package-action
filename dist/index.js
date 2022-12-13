@@ -41574,9 +41574,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
-const input_parameters_1 = __nccwpck_require__(9519);
-const create_package_1 = __nccwpck_require__(1628);
 const fs_1 = __nccwpck_require__(7147);
+const create_package_1 = __nccwpck_require__(1628);
+const input_parameters_1 = __nccwpck_require__(9519);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const logger = {
@@ -41602,7 +41602,7 @@ const fs_1 = __nccwpck_require__(7147);
         (0, core_1.setOutput)('package_filename', result.filename);
         const stepSummaryFile = process.env.GITHUB_STEP_SUMMARY;
         if (stepSummaryFile) {
-            (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created package ${result.filename}`);
+            (0, fs_1.writeFileSync)(stepSummaryFile, `🐙 Created Zip package, ${result.filename}`);
         }
     }
     catch (e) {
