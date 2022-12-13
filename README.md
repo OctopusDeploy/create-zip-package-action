@@ -2,7 +2,7 @@
 
 <img alt= "" src="https://github.com/OctopusDeploy/create-zip-package-action/raw/main/assets/github-actions-octopus.png" />
 
-This is a GitHub Action to create a Zip package to push to [Octopus Deploy](https://octopus.com/).
+This is a GitHub Action to create a Zip package(s) to push to [Octopus Deploy](https://octopus.com/).
 
 ## Examples
 
@@ -10,14 +10,16 @@ This is a GitHub Action to create a Zip package to push to [Octopus Deploy](http
 steps:
   - uses: actions/checkout@v3
 
+  # create a Zip package from files in the "reports" folder; create package in "packaging" folder
   - name: Create a Zip package 🐙
     uses: OctopusDeploy/create-zip-package-action@v3
     with:
       package_id: 'DemoPackage'
       version: '1.0.0'
-      output_folder: 'packaging'
+      output_folder: './packaging'
+      base_path: reports
       files: |
-        published/**/*.*
+        **/*.*
 ```
 
 ## 📥 Inputs
