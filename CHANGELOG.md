@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.0.0...v3.0.1) (2023-01-31)
+
+
+### Bug Fixes
+
+* updated dependencies ([5b20b2c](https://github.com/OctopusDeploy/create-zip-package-action/commit/5b20b2cad8fdaa6b0e39100fb6547743b0385c7a))
+
 ## 3.0.0 (2022-12-13)
 
 
