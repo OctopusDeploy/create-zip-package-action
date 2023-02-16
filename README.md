@@ -39,6 +39,10 @@ steps:
 | `package_file_path` | The full path to the package file that was created.           |
 | `package_filename`  | The filename, without the path, of the file that was created. |
 
+## Developers guide
+
+[Developers Guide](DEVELOPERS_GUIDE.md)
+
 ## 🤝 Contributions
 
 Contributions are welcome! :heart: Please read our [Contributing Guide](CONTRIBUTING.md) for information about how to get involved in this project.
