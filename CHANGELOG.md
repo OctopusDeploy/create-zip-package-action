@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.0.1...v3.0.2) (2023-02-17)
+
+
+### Bug Fixes
+
+* include dot-files support in glob selection ([#9](https://github.com/OctopusDeploy/create-zip-package-action/issues/9)) ([0ade358](https://github.com/OctopusDeploy/create-zip-package-action/commit/0ade35867834cef731c42bfab064787a96293e59))
+
 ## [3.0.1](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.0.0...v3.0.1) (2023-01-31)
 
 
