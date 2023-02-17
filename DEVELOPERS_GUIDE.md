@@ -24,5 +24,4 @@ In a test GitHub action you can use the branched build of the action by referenc
           base_path: .
           files: |
             **/*
-            **/.*
 ```
