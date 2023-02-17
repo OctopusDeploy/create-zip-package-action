@@ -11,7 +11,7 @@ git log -q -n 1 dist/index.js | less -F
 
 From the log output take note of the commit hash and push to GitHub
 
-In a test GitHub action you can use the branched build of the action by referencing the commit hash
+In a test GitHub action you can use the branched build of the action by referencing the branch or commit hash, see [here](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsuses) for details on the `uses` syntax.
 
 ```
 - name: Create Zip Package for Octopus Deploy
