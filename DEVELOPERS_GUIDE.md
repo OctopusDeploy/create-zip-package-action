@@ -16,7 +16,7 @@ In a test GitHub action you can use the branched build of the action by referenc
 ```
 - name: Create Zip Package for Octopus Deploy
       # You may pin to the exact commit or the version.
-        uses: OctopusDeploy/create-zip-package-action@6d73e1f62030dfa23534ff0d279774177d5ea1ea
+        uses: OctopusDeploy/create-zip-package-action@my-branch
         with:
           package_id: output
           version: 1.0.0
