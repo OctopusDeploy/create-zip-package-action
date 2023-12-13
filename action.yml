@@ -29,5 +29,5 @@ outputs:
     description: 'The filename, without the path, of the file that was created.'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
