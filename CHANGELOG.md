@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.0.2...v3.1.0) (2023-12-18)
+
+
+### Features
+
+* Upgrade to node 20 ([#18](https://github.com/OctopusDeploy/create-zip-package-action/issues/18)) ([a5fc3a6](https://github.com/OctopusDeploy/create-zip-package-action/commit/a5fc3a64b3f54db5b20213e11384df0a1f55c58f))
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([f7208b9](https://github.com/OctopusDeploy/create-zip-package-action/commit/f7208b9868dfbfab0eabb474ba0e530009533d70))
+
 ## [3.0.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.0.1...v3.0.2) (2023-02-17)
 
 
