@@ -48,7 +48,7 @@ jobs:
           files: |
             **/*
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: TestZipPackage.1.0.0
           path: ${{ steps.self_test.outputs.package_file_path }}
