@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.1...v3.1.2) (2025-03-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @actions/core to v1.11.1 ([2a4af71](https://github.com/OctopusDeploy/create-zip-package-action/commit/2a4af71fc3c0bcf39110ae8163b20fe6292273c7))
+* **deps:** update dependency @octopusdeploy/api-client to v3.5.1 ([506ca26](https://github.com/OctopusDeploy/create-zip-package-action/commit/506ca26a39dc8a61dc709e766e534d26747aa7de))
+* **deps:** update dependency @octopusdeploy/api-client to v3.5.2 ([#153](https://github.com/OctopusDeploy/create-zip-package-action/issues/153)) ([87ae5bc](https://github.com/OctopusDeploy/create-zip-package-action/commit/87ae5bccdf42b1aec9d45a2a7ebfb6ba29b96c34))
+
 ## [3.1.1](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.0...v3.1.1) (2024-02-04)
 
 
