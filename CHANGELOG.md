@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.3](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.2...v3.1.3) (2025-07-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @octopusdeploy/api-client to v3.7.0 ([a03d548](https://github.com/OctopusDeploy/create-zip-package-action/commit/a03d548e789032350fc6c574473ea6b8be588832))
+
 ## [3.1.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.1...v3.1.2) (2025-03-12)
 
 
