@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.3...v4.0.0) (2025-12-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Migrate to node 24
+
+### Features
+
+* Migrate to node 24 ([3c5b22a](https://github.com/OctopusDeploy/create-zip-package-action/commit/3c5b22a3db6d3a2caa0c6d929ecca94eda99a37c))
+
 ## [3.1.3](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.2...v3.1.3) (2025-07-29)
 
 
