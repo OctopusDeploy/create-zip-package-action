@@ -12,7 +12,7 @@ steps:
 
   # create a Zip package from files in the "reports" folder; create package in "packaging" folder
   - name: Create a Zip package 🐙
-    uses: OctopusDeploy/create-zip-package-action@v3
+    uses: OctopusDeploy/create-zip-package-action@v4
     with:
       package_id: 'DemoPackage'
       version: '1.0.0'
