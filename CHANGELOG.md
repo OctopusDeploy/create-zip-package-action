@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.0.0...v4.1.0) (2026-02-27)
+
+
+### Features
+
+* Add workflow to check for conventional commit format PR title ([#222](https://github.com/OctopusDeploy/create-zip-package-action/issues/222)) ([54940c3](https://github.com/OctopusDeploy/create-zip-package-action/commit/54940c37bb8a48a55834d6beede0c86ae5c52940))
+
 ## [4.0.0](https://github.com/OctopusDeploy/create-zip-package-action/compare/v3.1.3...v4.0.0) (2025-12-09)
 
 
