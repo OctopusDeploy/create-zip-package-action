@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.0...v4.1.1) (2026-04-13)
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 1.13.5 to 1.15.0 ([#269](https://github.com/OctopusDeploy/create-zip-package-action/issues/269)) ([a52430b](https://github.com/OctopusDeploy/create-zip-package-action/commit/a52430b0e48858ca53c0d586c3734a69571120bd))
+
 ## [4.1.0](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.0.0...v4.1.0) (2026-02-27)
 
 
