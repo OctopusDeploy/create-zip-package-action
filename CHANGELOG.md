@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.1...v4.1.2) (2026-05-12)
+
+
+### Bug Fixes
+
+* patch transitive axios vulnerability via npm audit fix ([#278](https://github.com/OctopusDeploy/create-zip-package-action/issues/278)) ([a5708ed](https://github.com/OctopusDeploy/create-zip-package-action/commit/a5708ed3609b4ab567ecc3b1c44b68197ec41142))
+
 ## [4.1.1](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.0...v4.1.1) (2026-04-13)
 
 
