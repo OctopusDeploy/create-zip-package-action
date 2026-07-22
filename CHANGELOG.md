@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.1...v4.1.2) (2026-07-22)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump js-yaml from 4.1.1 to 4.3.0 ([#300](https://github.com/OctopusDeploy/create-zip-package-action/issues/300)) ([5258091](https://github.com/OctopusDeploy/create-zip-package-action/commit/525809166033bf0ba16eef3491983a1e60c51cdc))
+* **deps-dev:** bump tmp from 0.2.5 to 0.2.6 ([#284](https://github.com/OctopusDeploy/create-zip-package-action/issues/284)) ([8906ace](https://github.com/OctopusDeploy/create-zip-package-action/commit/8906aceb4103316266881bf00edb8aaca6f0be09))
+* **deps:** bump @octopusdeploy/api-client to 3.11.5 ([#299](https://github.com/OctopusDeploy/create-zip-package-action/issues/299)) ([01dda35](https://github.com/OctopusDeploy/create-zip-package-action/commit/01dda353a07a350aca3382b5060a5f2931adecfe))
+* **deps:** bump @octopusdeploy/api-client to 3.11.6 ([#304](https://github.com/OctopusDeploy/create-zip-package-action/issues/304)) ([6fb7e19](https://github.com/OctopusDeploy/create-zip-package-action/commit/6fb7e190466108091b51b43fe005e4405f2de309))
+* **deps:** bump form-data from 4.0.5 to 4.0.6 ([#292](https://github.com/OctopusDeploy/create-zip-package-action/issues/292)) ([f56f5b0](https://github.com/OctopusDeploy/create-zip-package-action/commit/f56f5b055122be70f4dd8f5098079b4728f4c84d))
+* **deps:** update js-yaml to resolve DoS advisory ([#303](https://github.com/OctopusDeploy/create-zip-package-action/issues/303)) ([01f8f6c](https://github.com/OctopusDeploy/create-zip-package-action/commit/01f8f6cd1aadf782e4e26d4c2133e28b98bed0a5))
+* patch transitive axios vulnerability via npm audit fix ([#278](https://github.com/OctopusDeploy/create-zip-package-action/issues/278)) ([a5708ed](https://github.com/OctopusDeploy/create-zip-package-action/commit/a5708ed3609b4ab567ecc3b1c44b68197ec41142))
+
 ## [4.1.1](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.0...v4.1.1) (2026-04-13)
 
 
