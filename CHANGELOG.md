@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.1.3](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.2...v4.1.3) (2026-09-09)
+
+
+### Bug Fixes
+
+* **deps:** bump brace-expansion override to resolve DoS bypass ([#310](https://github.com/OctopusDeploy/create-zip-package-action/issues/310)) ([a6485f0](https://github.com/OctopusDeploy/create-zip-package-action/commit/a6485f0896c0b6dfd646f41498532e0258e22504))
+* **deps:** bump brace-expansion to resolve DoS advisory ([#305](https://github.com/OctopusDeploy/create-zip-package-action/issues/305)) ([ac8e18d](https://github.com/OctopusDeploy/create-zip-package-action/commit/ac8e18d78c3694dbf875bbf4b9ca3986689da49c))
+* **deps:** resolve new brace-expansion and js-yaml advisories ([#309](https://github.com/OctopusDeploy/create-zip-package-action/issues/309)) ([132e040](https://github.com/OctopusDeploy/create-zip-package-action/commit/132e040ff5cde6c59a098fb654fc74ab0e152899))
+* **deps:** resolve remaining npm audit advisories ([#307](https://github.com/OctopusDeploy/create-zip-package-action/issues/307)) ([fba4e6f](https://github.com/OctopusDeploy/create-zip-package-action/commit/fba4e6f1573334b891e8656ba69d8425cd46c5c9))
+
 ## [4.1.2](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.1...v4.1.2) (2026-07-22)
 
 
