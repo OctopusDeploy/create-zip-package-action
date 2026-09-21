@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.4](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.3...v4.1.4) (2026-09-21)
+
+
+### Bug Fixes
+
+* **deps:** resolve npm audit advisories ([#318](https://github.com/OctopusDeploy/create-zip-package-action/issues/318)) ([efa6c45](https://github.com/OctopusDeploy/create-zip-package-action/commit/efa6c45cdbf6dd5bc3ea6beabd18a5976a5d585e))
+
 ## [4.1.3](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.2...v4.1.3) (2026-09-09)
 
 
