@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.6](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.5...v4.1.6) (2026-10-11)
+
+
+### Bug Fixes
+
+* **deps-dev:** bump handlebars from 4.7.9 to 4.7.10 ([#325](https://github.com/OctopusDeploy/create-zip-package-action/issues/325)) ([99126c0](https://github.com/OctopusDeploy/create-zip-package-action/commit/99126c0d7c1e387f8e67f52d9f4ff7634d3be3b8))
+
 ## [4.1.5](https://github.com/OctopusDeploy/create-zip-package-action/compare/v4.1.4...v4.1.5) (2026-10-05)
 
 
